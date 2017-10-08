@@ -10,7 +10,17 @@ public class Criteria<E> {
 	public void add(E searchCriteria, Object value) {
 		criteria.put(searchCriteria, value);
 	}
-	
-	// you may add your own code here
+
+    public String getSearchCriteriaClassName() {
+        return criteria.keySet().iterator().next().getClass().getName();
+    }
+
+    public Object getValue(E searchCriteria){
+        return criteria.get(searchCriteria);
+    }
+
+    public Map<E,Object> getCriteria(){
+        return criteria;
+    }
 
 }
