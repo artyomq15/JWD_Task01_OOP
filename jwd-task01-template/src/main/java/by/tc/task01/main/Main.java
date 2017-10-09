@@ -7,7 +7,6 @@ import by.tc.task01.entity.criteria.Criteria;
 import by.tc.task01.service.ApplianceService;
 import by.tc.task01.service.ServiceFactory;
 
-import java.util.Date;
 
 
 public class Main {
@@ -20,10 +19,10 @@ public class Main {
 
 		//////////////////////////////////////////////////////////////////
 
-		/*Criteria<Oven> criteriaOven = new Criteria<Oven>();
+		Criteria<Oven> criteriaOven = new Criteria<Oven>();
+		criteriaOven.setApplianceType("Oven");
 		criteriaOven.add(Oven.HEIGHT, "45.5");
 		criteriaOven.add(Oven.WIDTH, 59.5);
-		System.out.println(criteriaOven.getSearchCriteriaClassName());
 
 		appliance = service.find(criteriaOven);
 
@@ -32,8 +31,8 @@ public class Main {
 		/////////////////////////////////////////////////////////////////
 
 		Criteria<Laptop> criteriaLaptop = new Criteria<Laptop>();
+		criteriaLaptop.setApplianceType("Laptop");
 		criteriaLaptop.add(Laptop.BATTERY_CAPACITY, " 1");
-		System.out.println(criteriaLaptop.getSearchCriteriaClassName());
 
 		appliance = service.find(criteriaLaptop);
 
@@ -42,23 +41,24 @@ public class Main {
 		//////////////////////////////////////////////////////////////////
 
 		Criteria<Refrigerator> criteriaRefrigerator = new Criteria<Refrigerator>();
+		criteriaRefrigerator.setApplianceType("Refrigerator");
 		criteriaRefrigerator.add(Refrigerator.FREEZER_CAPACITY, "15");
 		criteriaRefrigerator.add(Refrigerator.HEIGHT, 180);
-		System.out.println(criteriaRefrigerator.getSearchCriteriaClassName());
 
 		appliance = service.find(criteriaRefrigerator);
 
-		PrintApplianceInfo.print(appliance);*/
+		PrintApplianceInfo.print(appliance);
 
 		//////////////////////////////////////////////////////////////////
 
-		/*Criteria<Speakers> criteriaSpeakers = new Criteria<Speakers>();
+		Criteria<Speakers> criteriaSpeakers = new Criteria<Speakers>();
+		criteriaSpeakers.setApplianceType("Speakers");
 		criteriaSpeakers.add(Speakers.FREQUENCY_RANGE, "2-3.5");
 		//criteriaSpeakers.add(Speakers.CORD_LENGTH, 2);
 
 		appliance = service.find(criteriaSpeakers);
 
-		PrintApplianceInfo.print(appliance);*/
+		PrintApplianceInfo.print(appliance);
 
 		//////////////////////////////////////////////////////////////////
 
@@ -75,7 +75,7 @@ public class Main {
 
 		//////////////////////////////////////////////////////////////////
 
-		/*Criteria<VacuumCleaner> criteriaVacuumCleaner = new Criteria<VacuumCleaner>();
+		Criteria<VacuumCleaner> criteriaVacuumCleaner = new Criteria<VacuumCleaner>();
 		criteriaVacuumCleaner.setApplianceType("VacuumCleaner");
 		criteriaVacuumCleaner.add(VacuumCleaner.POWER_CONSUMPTION, "110");
 		criteriaVacuumCleaner.add(VacuumCleaner.FILTER_TYPE, "B");
@@ -83,7 +83,7 @@ public class Main {
 
 		appliance = service.find(criteriaVacuumCleaner);
 
-		PrintApplianceInfo.print(appliance);*/
+		PrintApplianceInfo.print(appliance);
 
 
 
