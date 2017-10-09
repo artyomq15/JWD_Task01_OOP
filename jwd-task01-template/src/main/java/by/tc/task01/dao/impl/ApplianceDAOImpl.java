@@ -91,6 +91,7 @@ public class ApplianceDAOImpl implements ApplianceDAO {
 
         return appliance;
 
+
     }
 
     private List<String> parseValues(String line) {

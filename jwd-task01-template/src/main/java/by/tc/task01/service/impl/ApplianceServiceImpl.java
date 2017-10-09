@@ -12,7 +12,6 @@ public class ApplianceServiceImpl implements ApplianceService{
 	@Override
 	public <E> Appliance find(Criteria<E> criteria) {
 		if (!Validator.criteriaValidator(criteria)) {
-			System.out.println("-");
 			return null;
 		}
 		DAOFactory factory = DAOFactory.getInstance();

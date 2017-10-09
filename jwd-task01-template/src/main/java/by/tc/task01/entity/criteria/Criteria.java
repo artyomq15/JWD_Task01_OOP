@@ -7,7 +7,7 @@ public class Criteria<E> {
 
     private String applianceType;
 
-    private Map<E, Object> criteria = new HashMap<E, Object>();
+    private Map<E, Object> criteria = new HashMap<>();
 
     public String getApplianceType() {
         return applianceType;

@@ -17,9 +17,8 @@ public class Main {
 		ServiceFactory factory = ServiceFactory.getInstance();
 		ApplianceService service = factory.getApplianceService();
 
-		//////////////////////////////////////////////////////////////////
 
-		Criteria<Oven> criteriaOven = new Criteria<Oven>();
+		Criteria<Oven> criteriaOven = new Criteria<>();
 		criteriaOven.setApplianceType("Oven");
 		criteriaOven.add(Oven.HEIGHT, "45.5");
 		criteriaOven.add(Oven.WIDTH, 59.5);
@@ -28,9 +27,8 @@ public class Main {
 
 		PrintApplianceInfo.print(appliance);
 
-		/////////////////////////////////////////////////////////////////
 
-		Criteria<Laptop> criteriaLaptop = new Criteria<Laptop>();
+		Criteria<Laptop> criteriaLaptop = new Criteria<>();
 		criteriaLaptop.setApplianceType("Laptop");
 		criteriaLaptop.add(Laptop.BATTERY_CAPACITY, " 1");
 
@@ -38,9 +36,8 @@ public class Main {
 
 		PrintApplianceInfo.print(appliance);
 
-		//////////////////////////////////////////////////////////////////
 
-		Criteria<Refrigerator> criteriaRefrigerator = new Criteria<Refrigerator>();
+		Criteria<Refrigerator> criteriaRefrigerator = new Criteria<>();
 		criteriaRefrigerator.setApplianceType("Refrigerator");
 		criteriaRefrigerator.add(Refrigerator.FREEZER_CAPACITY, "15");
 		criteriaRefrigerator.add(Refrigerator.HEIGHT, 180);
@@ -49,20 +46,18 @@ public class Main {
 
 		PrintApplianceInfo.print(appliance);
 
-		//////////////////////////////////////////////////////////////////
 
-		Criteria<Speakers> criteriaSpeakers = new Criteria<Speakers>();
+		Criteria<Speakers> criteriaSpeakers = new Criteria<>();
 		criteriaSpeakers.setApplianceType("Speakers");
 		criteriaSpeakers.add(Speakers.FREQUENCY_RANGE, "2-3.5");
-		//criteriaSpeakers.add(Speakers.CORD_LENGTH, 2);
 
 		appliance = service.find(criteriaSpeakers);
 
 		PrintApplianceInfo.print(appliance);
 
-		//////////////////////////////////////////////////////////////////
 
-		Criteria<TabletPC> criteriaTabletPC = new Criteria<TabletPC>();
+
+		Criteria<TabletPC> criteriaTabletPC = new Criteria<>();
 		criteriaTabletPC.setApplianceType("TabletPC");
 		criteriaTabletPC.add(TabletPC.BATTERY_CAPACITY, "5");
 		criteriaTabletPC.add(TabletPC.COLOR, "gReen");
@@ -73,9 +68,8 @@ public class Main {
 
 		PrintApplianceInfo.print(appliance);
 
-		//////////////////////////////////////////////////////////////////
 
-		Criteria<VacuumCleaner> criteriaVacuumCleaner = new Criteria<VacuumCleaner>();
+		Criteria<VacuumCleaner> criteriaVacuumCleaner = new Criteria<>();
 		criteriaVacuumCleaner.setApplianceType("VacuumCleaner");
 		criteriaVacuumCleaner.add(VacuumCleaner.POWER_CONSUMPTION, "110");
 		criteriaVacuumCleaner.add(VacuumCleaner.FILTER_TYPE, "B");
