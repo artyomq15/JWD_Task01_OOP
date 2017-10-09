@@ -63,7 +63,9 @@ public class Main {
 		//////////////////////////////////////////////////////////////////
 
 		Criteria<TabletPC> criteriaTabletPC = new Criteria<TabletPC>();
-		criteriaTabletPC.add(TabletPC.COLOR, "green");
+		criteriaTabletPC.setApplianceType("TabletPC");
+		criteriaTabletPC.add(TabletPC.BATTERY_CAPACITY, "5");
+		criteriaTabletPC.add(TabletPC.COLOR, "gReen");
 		criteriaTabletPC.add(TabletPC.DISPLAY_INCHES, 16);
 		criteriaTabletPC.add(TabletPC.MEMORY_ROM, "16000");
 
@@ -74,6 +76,7 @@ public class Main {
 		//////////////////////////////////////////////////////////////////
 
 		/*Criteria<VacuumCleaner> criteriaVacuumCleaner = new Criteria<VacuumCleaner>();
+		criteriaVacuumCleaner.setApplianceType("VacuumCleaner");
 		criteriaVacuumCleaner.add(VacuumCleaner.POWER_CONSUMPTION, "110");
 		criteriaVacuumCleaner.add(VacuumCleaner.FILTER_TYPE, "B");
 		criteriaVacuumCleaner.add(VacuumCleaner.WAND_TYPE, "all-in-one   ");

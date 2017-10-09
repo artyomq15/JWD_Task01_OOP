@@ -1,6 +1,8 @@
 package by.tc.task01.dao.impl;
 
 import by.tc.task01.dao.ApplianceDAO;
+import by.tc.task01.dao.creator.CreatorCommand;
+import by.tc.task01.dao.director.ApplianceDirector;
 import by.tc.task01.entity.*;
 import by.tc.task01.entity.criteria.Criteria;
 
@@ -18,55 +20,44 @@ public class ApplianceDAOImpl implements ApplianceDAO {
 
     @Override
     public <E> Appliance find(Criteria<E> criteria) {
+        return getObjectFromFile(criteria);
+    }
+
+    private <E> Appliance getObjectFromFile(Criteria<E> criteria){
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(
                         new FileInputStream(FILEPATH)))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (isProperLine(line,criteria)) {
-                    return findObject(line, criteria);
+                    return getObject(line, criteria);
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
         return null;
     }
 
     private <E> boolean isProperLine(String line, Criteria<E> criteria){
-        return  isLineStartsWithProperClassName(line, criteria.getSearchCriteriaSimpleClassName())&& lineHasProperValues(line, criteria);
+        return  lineStartsWithProperClassName(line, criteria.getApplianceType())&& lineHasProperValues(line, criteria);
     }
 
-    private boolean isLineStartsWithProperClassName(String line, String className){
+    private boolean lineStartsWithProperClassName(String line, String className){
         return line.startsWith(className);
     }
 
     private <E> boolean lineHasProperValues(String line, Criteria<E> criteria) {
-        boolean result = false;
+        List<String> criteriaAndValuesFromLine = parseCriteriaAndValues(line);
+
         for (E searchCriteria : criteria.getCriteria().keySet()) {
             Object value = criteria.getValue(searchCriteria);
 
-            if (criteriaPresentsInLine(line, searchCriteria, value)) {
-                result = true;
-            } else {
-                result = false;
-            }
-            if (!result) {
+            if (!criteriaPresentsInLine(criteriaAndValuesFromLine, searchCriteria, value)) {
                 return false;
             }
         }
-        return result;
-    }
-
-    private <E> boolean criteriaPresentsInLine(String line, E searchCriteria, Object value) {
-        List<String> criteriaAndValues = parseCriteriaAndValues(line);
-
-        for (String criteriaAndValue: criteriaAndValues){
-            if (criteriaAndValue.equalsIgnoreCase(searchCriteria+"="+value.toString().trim())){
-                return true;
-            }
-        }
-        return false;
+        return true;
     }
 
     private List<String> parseCriteriaAndValues(String line) {
@@ -79,94 +70,28 @@ public class ApplianceDAOImpl implements ApplianceDAO {
         return values;
     }
 
-    private <E> Appliance findObject(String line, Criteria<E> criteria){
-        if (criteria.getSearchCriteriaClassName().contains("Oven")) {
-            return findOvenObject(line);
-        } else if (criteria.getSearchCriteriaClassName().contains("Laptop")) {
-            return findLaptopObject(line);
-        } else if (criteria.getSearchCriteriaClassName().contains("Refrigerator")) {
-            return findRefrigeratorObject(line);
-        } else if (criteria.getSearchCriteriaClassName().contains("Speakers")) {
-            return findSpeakersObject(line);
-        } else if (criteria.getSearchCriteriaClassName().contains("TabletPC")) {
-            return findTabletPCObject(line);
-        } else if (criteria.getSearchCriteriaClassName().contains("VacuumCleaner")) {
-            return findVacuumCleanerObject(line);
-        } else {
-            return null;
+    private <E> boolean criteriaPresentsInLine(List<String> criteriaAndValuesFromLine, E searchCriteria, Object value) {
+        for (String criteriaAndValueFromLine: criteriaAndValuesFromLine){
+            if (criteriaAndValueFromLine.equalsIgnoreCase(searchCriteria+"="+value.toString().trim())){
+                return true;
+            }
         }
+        return false;
     }
 
-    private Appliance findOvenObject(String line) {
+
+
+    private <E> Appliance getObject(String line, Criteria<E> criteria){
         List<String> values = parseValues(line);
-        Oven oven = new Oven();
-        oven.setPowerConsumption(Integer.parseInt(values.get(0)));
-        oven.setWeight(Double.parseDouble(values.get(1)));
-        oven.setCapacity(Integer.parseInt(values.get(2)));
-        oven.setDepth(Integer.parseInt(values.get(3)));
-        oven.setHeight(Double.parseDouble(values.get(4)));
-        oven.setWidth(Double.parseDouble(values.get(5)));
-        return oven;
+
+        ApplianceDirector applianceDirector = new ApplianceDirector();
+        CreatorCommand creatorCommand = applianceDirector.getCreatorCommand(criteria.getApplianceType());
+
+        Appliance appliance = creatorCommand.execute(values);
+
+        return appliance;
+
     }
-
-    private Appliance findLaptopObject(String line) {
-        List<String> values = parseValues(line);
-        Laptop laptop = new Laptop();
-        laptop.setBatteryCapacity(Double.parseDouble(values.get(0)));
-        laptop.setOperatingSystem(values.get(1));
-        laptop.setMemoryRom(Integer.parseInt(values.get(2)));
-        laptop.setSystemMemory(Integer.parseInt(values.get(3)));
-        laptop.setCentralProcessorUnit(Double.parseDouble(values.get(4)));
-        laptop.setDisplayInches(Integer.parseInt(values.get(5)));
-        return laptop;
-    }
-
-    private Appliance findRefrigeratorObject(String line) {
-        List<String> values = parseValues(line);
-        Refrigerator refrigerator = new Refrigerator();
-        refrigerator.setPowerConsumption(Integer.parseInt(values.get(0)));
-        refrigerator.setWeight(Double.parseDouble(values.get(1)));
-        refrigerator.setFreezerCapacity(Integer.parseInt(values.get(2)));
-        refrigerator.setOverallCapacity(Double.parseDouble(values.get(3)));
-        refrigerator.setHeight(Double.parseDouble(values.get(4)));
-        refrigerator.setWidth(Double.parseDouble(values.get(5)));
-        return refrigerator;
-    }
-
-    private Appliance findSpeakersObject(String line) {
-        List<String> values = parseValues(line);
-        Speakers speakers = new Speakers();
-        speakers.setPowerConsumption(Integer.parseInt(values.get(0)));
-        speakers.setNumberOfSpeakers(Integer.parseInt(values.get(1)));
-        speakers.setFrequencyRange(values.get(2));
-        speakers.setCordLength(Integer.parseInt(values.get(3)));
-
-        return speakers;
-    }
-
-    private Appliance findTabletPCObject(String line) {
-        List<String> values = parseValues(line);
-        TabletPC tabletPC = new TabletPC();
-        tabletPC.setBatteryCapacity(Double.parseDouble(values.get(0)));
-        tabletPC.setDisplayInches(Integer.parseInt(values.get(1)));
-        tabletPC.setMemoryRom(Integer.parseInt(values.get(2)));
-        tabletPC.setFlashMemoryCapacity(Integer.parseInt(values.get(3)));
-        tabletPC.setColor(values.get(4));
-        return tabletPC;
-    }
-
-    private Appliance findVacuumCleanerObject(String line) {
-        List<String> values = parseValues(line);
-        VacuumCleaner vacuumCleaner = new VacuumCleaner();
-        vacuumCleaner.setPowerConsumption(Integer.parseInt(values.get(0)));
-        vacuumCleaner.setFilterType(values.get(1));
-        vacuumCleaner.setBagType(values.get(2));
-        vacuumCleaner.setWandType(values.get(3));
-        vacuumCleaner.setMotorSpeedRegulation(Integer.parseInt(values.get(4)));
-        vacuumCleaner.setCleaningWidth(Integer.parseInt(values.get(5)));
-        return vacuumCleaner;
-    }
-
 
     private List<String> parseValues(String line) {
         Pattern p = Pattern.compile("=(\\S)+");
@@ -177,9 +102,4 @@ public class ApplianceDAOImpl implements ApplianceDAO {
         }
         return values;
     }
-
-
 }
-
-
-//you may add your own new classes
