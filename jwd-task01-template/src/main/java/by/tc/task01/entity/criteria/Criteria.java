@@ -15,6 +15,10 @@ public class Criteria<E> {
         return criteria.keySet().iterator().next().getClass().getName();
     }
 
+    public String getSearchCriteriaSimpleClassName() {
+        return criteria.keySet().iterator().next().getClass().getSimpleName();
+    }
+
     public Object getValue(E searchCriteria){
         return criteria.get(searchCriteria);
     }

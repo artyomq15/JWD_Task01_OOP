@@ -7,6 +7,8 @@ import by.tc.task01.entity.criteria.Criteria;
 import by.tc.task01.service.ApplianceService;
 import by.tc.task01.service.ServiceFactory;
 
+import java.util.Date;
+
 
 public class Main {
 
@@ -50,24 +52,24 @@ public class Main {
 
 		//////////////////////////////////////////////////////////////////
 
-		Criteria<Speakers> criteriaSpeakers = new Criteria<Speakers>();
+		/*Criteria<Speakers> criteriaSpeakers = new Criteria<Speakers>();
 		criteriaSpeakers.add(Speakers.FREQUENCY_RANGE, "2-3.5");
 		//criteriaSpeakers.add(Speakers.CORD_LENGTH, 2);
 
 		appliance = service.find(criteriaSpeakers);
 
-		PrintApplianceInfo.print(appliance);
+		PrintApplianceInfo.print(appliance);*/
 
 		//////////////////////////////////////////////////////////////////
 
-		/*Criteria<TabletPC> criteriaTabletPC = new Criteria<TabletPC>();
+		Criteria<TabletPC> criteriaTabletPC = new Criteria<TabletPC>();
 		criteriaTabletPC.add(TabletPC.COLOR, "green");
 		criteriaTabletPC.add(TabletPC.DISPLAY_INCHES, 16);
-		criteriaTabletPC.add(TabletPC.MEMORY_ROM, "8000");
+		criteriaTabletPC.add(TabletPC.MEMORY_ROM, "16000");
 
 		appliance = service.find(criteriaTabletPC);
 
-		PrintApplianceInfo.print(appliance);*/
+		PrintApplianceInfo.print(appliance);
 
 		//////////////////////////////////////////////////////////////////
 

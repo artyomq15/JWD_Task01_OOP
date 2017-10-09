@@ -23,24 +23,8 @@ public class ApplianceDAOImpl implements ApplianceDAO {
                         new FileInputStream(FILEPATH)))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.contains(getCriteriaShortClassName(criteria.getSearchCriteriaClassName())) && isProperLine(line, criteria)) {
-
-                    if (criteria.getSearchCriteriaClassName().contains("Oven")) {
-                        return findOvenObject(line);
-                    } else if (criteria.getSearchCriteriaClassName().contains("Laptop")) {
-                        return findLaptopObject(line);
-                    } else if (criteria.getSearchCriteriaClassName().contains("Refrigerator")) {
-                        return findRefrigeratorObject(line);
-                    } else if (criteria.getSearchCriteriaClassName().contains("Speakers")) {
-                        return findSpeakersObject(line);
-                    } else if (criteria.getSearchCriteriaClassName().contains("TabletPC")) {
-                        return findTabletPCObject(line);
-                    } else if (criteria.getSearchCriteriaClassName().contains("VacuumCleaner")) {
-                        return findVacuumCleanerObject(line);
-                    } else {
-                        return null;
-                    }
-
+                if (isProperLine(line,criteria)) {
+                    return findObject(line, criteria);
                 }
             }
         } catch (IOException e) {
@@ -49,17 +33,15 @@ public class ApplianceDAOImpl implements ApplianceDAO {
         return null;
     }
 
-    private String getCriteriaShortClassName(String longName){
-        Pattern p = Pattern.compile("\\$(\\S)+");
-        Matcher m = p.matcher(longName);
-        String value = "";
-        if (m.find()) {
-            value = longName.substring(m.start()+1, m.end());
-        }
-        return value;
+    private <E> boolean isProperLine(String line, Criteria<E> criteria){
+        return  isLineStartsWithProperClassName(line, criteria.getSearchCriteriaSimpleClassName())&& lineHasProperValues(line, criteria);
     }
 
-    private <E> boolean isProperLine(String line, Criteria<E> criteria) {
+    private boolean isLineStartsWithProperClassName(String line, String className){
+        return line.startsWith(className);
+    }
+
+    private <E> boolean lineHasProperValues(String line, Criteria<E> criteria) {
         boolean result = false;
         for (E searchCriteria : criteria.getCriteria().keySet()) {
             Object value = criteria.getValue(searchCriteria);
@@ -95,6 +77,24 @@ public class ApplianceDAOImpl implements ApplianceDAO {
             values.add(line.substring(m.start(), m.end() - 1));
         }
         return values;
+    }
+
+    private <E> Appliance findObject(String line, Criteria<E> criteria){
+        if (criteria.getSearchCriteriaClassName().contains("Oven")) {
+            return findOvenObject(line);
+        } else if (criteria.getSearchCriteriaClassName().contains("Laptop")) {
+            return findLaptopObject(line);
+        } else if (criteria.getSearchCriteriaClassName().contains("Refrigerator")) {
+            return findRefrigeratorObject(line);
+        } else if (criteria.getSearchCriteriaClassName().contains("Speakers")) {
+            return findSpeakersObject(line);
+        } else if (criteria.getSearchCriteriaClassName().contains("TabletPC")) {
+            return findTabletPCObject(line);
+        } else if (criteria.getSearchCriteriaClassName().contains("VacuumCleaner")) {
+            return findVacuumCleanerObject(line);
+        } else {
+            return null;
+        }
     }
 
     private Appliance findOvenObject(String line) {
@@ -152,7 +152,6 @@ public class ApplianceDAOImpl implements ApplianceDAO {
         tabletPC.setMemoryRom(Integer.parseInt(values.get(2)));
         tabletPC.setFlashMemoryCapacity(Integer.parseInt(values.get(3)));
         tabletPC.setColor(values.get(4));
-        System.out.println(tabletPC.getColor());
         return tabletPC;
     }
 
