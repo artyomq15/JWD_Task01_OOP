@@ -1,5 +1,7 @@
 package by.tc.task01.entity;
 
-public abstract class Appliance {
+import java.io.Serializable;
+
+public abstract class Appliance implements Serializable{
 
 }

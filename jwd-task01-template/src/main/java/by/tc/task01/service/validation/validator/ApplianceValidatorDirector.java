@@ -1,4 +1,4 @@
-package by.tc.task01.service.validation.director;
+package by.tc.task01.service.validation.validator;
 
 import by.tc.task01.service.validation.validator.*;
 

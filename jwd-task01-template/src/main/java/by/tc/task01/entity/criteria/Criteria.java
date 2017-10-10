@@ -17,15 +17,15 @@ public class Criteria<E> {
         this.applianceType = applianceType;
     }
 
-	public void add(E searchCriteria, Object value) {
-		criteria.put(searchCriteria, value);
-	}
+    public void add(E searchCriteria, Object value) {
+        criteria.put(searchCriteria, value);
+    }
 
-    public Object getValue(E searchCriteria){
+    public Object getValue(E searchCriteria) {
         return criteria.get(searchCriteria);
     }
 
-    public Map<E,Object> getCriteria(){
+    public Map<E, Object> getCriteria() {
         return criteria;
     }
 

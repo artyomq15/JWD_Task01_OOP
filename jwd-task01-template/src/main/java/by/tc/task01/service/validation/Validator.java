@@ -1,7 +1,7 @@
 package by.tc.task01.service.validation;
 
 import by.tc.task01.entity.criteria.Criteria;
-import by.tc.task01.service.validation.director.ApplianceValidatorDirector;
+import by.tc.task01.service.validation.validator.ApplianceValidatorDirector;
 import by.tc.task01.service.validation.validator.ApplianceValidator;
 
 

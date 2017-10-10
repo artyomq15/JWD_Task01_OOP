@@ -1,5 +1,6 @@
-package by.tc.task01.dao.creator;
+package by.tc.task01.dao.creator.impl;
 
+import by.tc.task01.dao.creator.CreatorCommand;
 import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.Speakers;
 
