@@ -5,7 +5,7 @@ import by.tc.task01.dao.creator.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ApplianceDirector {
+public class ApplianceCreatorDirector {
     private Map<String, CreatorCommand> dispatcher = new HashMap<>();
 
     {
@@ -17,7 +17,7 @@ public class ApplianceDirector {
         dispatcher.put("VacuumCleaner", new VacuumCleanerCreator());
     }
 
-    public ApplianceDirector(){
+    public ApplianceCreatorDirector(){
 
     }
 

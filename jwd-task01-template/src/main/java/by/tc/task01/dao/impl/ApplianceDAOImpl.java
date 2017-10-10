@@ -2,7 +2,7 @@ package by.tc.task01.dao.impl;
 
 import by.tc.task01.dao.ApplianceDAO;
 import by.tc.task01.dao.creator.CreatorCommand;
-import by.tc.task01.dao.director.ApplianceDirector;
+import by.tc.task01.dao.director.ApplianceCreatorDirector;
 import by.tc.task01.entity.*;
 import by.tc.task01.entity.criteria.Criteria;
 
@@ -84,8 +84,8 @@ public class ApplianceDAOImpl implements ApplianceDAO {
     private <E> Appliance getObject(String line, Criteria<E> criteria){
         List<String> values = parseValues(line);
 
-        ApplianceDirector applianceDirector = new ApplianceDirector();
-        CreatorCommand creatorCommand = applianceDirector.getCreatorCommand(criteria.getApplianceType());
+        ApplianceCreatorDirector applianceCreatorDirector = new ApplianceCreatorDirector();
+        CreatorCommand creatorCommand = applianceCreatorDirector.getCreatorCommand(criteria.getApplianceType());
 
         Appliance appliance = creatorCommand.execute(values);
 
