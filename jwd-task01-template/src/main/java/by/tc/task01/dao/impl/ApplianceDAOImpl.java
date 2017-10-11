@@ -34,7 +34,7 @@ public class ApplianceDAOImpl implements ApplianceDAO {
                 }
             }
         } catch (IOException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         return null;
     }
