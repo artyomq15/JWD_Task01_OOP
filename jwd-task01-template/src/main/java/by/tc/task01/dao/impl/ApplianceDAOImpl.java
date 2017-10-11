@@ -16,7 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ApplianceDAOImpl implements ApplianceDAO {
-    private static final String FILEPATH = "D:\\Epam\\JWD_Task01_OOP\\jwd-task01-template\\src\\main\\resources\\appliances_db.txt";
+    private static final String FILEPATH = "jwd-task01-template/src/main/resources/appliances_db.txt";
 
     @Override
     public <E> Appliance find(Criteria<E> criteria) {
